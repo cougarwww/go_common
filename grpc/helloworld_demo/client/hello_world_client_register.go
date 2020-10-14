@@ -20,7 +20,11 @@ func StartClientRegister() {
 	if err != nil {
 		log.Fatal("init etcd resolver err:", err.Error())
 	}
-	conn, err := grpc.Dial(fmt.Sprintf("%s:///HelloService", schema), grpc.WithInsecure(), grpc.WithBalancerName(roundrobin.Name))
+
+	addres := fmt.Sprintf("%s:///HelloService", schema)
+	fmt.Println(addres)
+
+	conn, err := grpc.Dial(addres, grpc.WithInsecure(), grpc.WithBalancerName(roundrobin.Name))
 	if err != nil {
 		fmt.Println(err)
 		return
